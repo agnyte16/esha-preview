@@ -1,0 +1,277 @@
+/* Each desktop composition fits below the fixed navigation at normal zoom.
+   Narrow and short windows keep their natural flow, so text is never clipped. */
+:root {
+  --nav-space: 96px;
+  --panel-height: calc(100svh - var(--nav-space) - 16px);
+}
+html { scroll-padding-top: var(--nav-space); }
+html:has(body.motion-off) { scroll-behavior: auto; }
+.header, .header.is-scrolled {
+  position: fixed;
+  top: 16px;
+  height: 64px;
+  left: 24px;
+  width: calc(100% - 48px);
+  padding: 0 24px;
+  animation: none;
+}
+
+/* A real layout, rather than a scaled or cropped screenshot. */
+.hero {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  gap: 12px;
+  height: 100svh;
+  min-height: 620px;
+  max-height: none;
+  padding: 108px var(--gutter) 16px;
+}
+.hero-headline { padding: 0; text-align: center; }
+.hero-headline .eyebrow { justify-content: center; }
+@media (min-width: 701px) {
+  .header .nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+    white-space: nowrap;
+  }
+}
+.hero-headline h1 {
+  font-size: clamp(44px, 7.5svh, 76px);
+  line-height: 1;
+  margin: 8px 0 0;
+}
+.hero-headline h1 small {
+  font-size: clamp(22px, 2.8svh, 30px);
+  line-height: 1.3;
+  margin-bottom: 5px;
+}
+.hero-vehicle {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: min(1100px, 86vw);
+  height: 100%;
+  min-height: 0;
+  max-height: 100%;
+  align-self: center;
+  justify-self: center;
+  object-fit: contain;
+  transform: none;
+  animation: fitted-vehicle-entry 1.2s ease-out;
+}
+.hero-wordmark { top: 38%; }
+.hero-side { top: 42%; }
+.hero-coordinate { top: 43%; }
+.hero-console {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  grid-template-columns: 1.4fr .8fr auto;
+  gap: 24px;
+  padding: 17px 24px;
+}
+.hero-console p { font-size: 16px; line-height: 1.5; }
+.hero-console .console-specialties { padding-left: 24px; line-height: 1.6; }
+.hero-bottom { position: relative; inset: auto; min-height: 20px; }
+
+/* The compact form retains full-size controls and all existing fields. */
+.contact-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px 24px;
+  padding: 24px;
+  align-self: center;
+}
+.contact-form > * { grid-column: 1 / -1; min-width: 0; }
+.contact-form label[for="name"], .contact-form label[for="car"] { grid-column: auto; }
+.contact-form label { margin: 0; }
+.contact-form .form-heading { margin: 0; padding-bottom: 12px; }
+.contact-form input, .contact-form select { padding: 9px 0; min-height: 44px; }
+.contact-form textarea { height: 74px; min-height: 74px; padding: 9px 0; }
+.contact-form .button { min-height: 48px; margin: 10px 0 0; padding: 12px 20px; justify-content: center; }
+#form-status:empty { display: none; }
+
+@media (min-width: 1000px) and (min-height: 640px) {
+  :root { --panel-height: 100svh; }
+  html { scroll-padding-top: 0; }
+  .section { padding: calc(var(--nav-space) + 24px) var(--gutter) 28px; }
+  .intro { padding: calc(var(--nav-space) + 24px) var(--gutter) 40px; gap: 40px; }
+  .intro h2 { font-size: clamp(48px, 7.5svh, 80px); }
+  .intro .lead { margin-top: 22px; font-size: 17px; }
+  .intro-marker { gap: 32px; }
+
+  .services {
+    height: var(--panel-height);
+    padding: calc(var(--nav-space) + 20px) var(--gutter) 24px;
+    grid-template-columns: 1.12fr 1fr 1fr;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 18px;
+  }
+  .service, .service:first-child { grid-row: auto; min-height: 0; height: 100%; }
+  .service-copy { padding: 24px; }
+  .service-heading, .service:not(:first-child) .service-heading { display: block; }
+  .service-heading h3, .service:first-child .service-heading h3,
+  .service:not(:first-child) .service-heading h3 { font-size: clamp(32px, 4.5svh, 48px); }
+  .service-heading h3 br { display: initial; }
+  .service-heading > span, .service:not(:first-child) .service-heading > span {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .service-copy p, .service:not(:first-child) .service-copy p { margin: 16px 0; line-height: 1.5; }
+  .price-note { grid-column: 1 / -1; margin: 0; }
+
+  .detail-story, .gallery-section, .process, .studio, .contact {
+    height: var(--panel-height);
+    min-height: 0;
+    padding-top: calc(var(--nav-space) + 28px);
+    padding-bottom: 28px;
+    align-items: center;
+  }
+  .detail-story { grid-template-columns: 1.05fr 1fr; gap: 6vw; }
+  .detail-visual {
+    height: 100%;
+    min-height: 0;
+    aspect-ratio: auto;
+    overflow: hidden;
+    border-radius: 0 18px 18px 0;
+  }
+  .detail-visual > img { height: calc(100% + 44px); margin-top: -22px; border-radius: 0; }
+  .detail-callout { bottom: 24px; right: 24px; padding: 20px 24px; min-width: 220px; }
+  .detail-callout p { font-size: 22px; margin-top: 10px; }
+  .detail-copy { padding: 0; }
+  .detail-copy h2 { font-size: clamp(48px, 7.8svh, 74px); margin: 18px 0 22px; }
+  .detail-copy > p:not(.eyebrow) { font-size: 16px; line-height: 1.6; max-width: 470px; }
+  .detail-copy .text-link { margin-top: 18px; }
+  .detail-line { margin-top: 24px; padding-top: 18px; }
+
+  .gallery-section { display: flex; flex-direction: column; align-items: stretch; }
+  .section-top { flex-shrink: 0; margin-bottom: 22px; }
+  .section-top .eyebrow { margin-bottom: 12px; }
+  .section-top h2 { font-size: clamp(48px, 6.5svh, 68px); }
+  .section-top h2 br { display: none; }
+  .gallery-track { flex: 1; min-height: 0; padding-bottom: 12px; gap: 24px; }
+  .gallery-item { flex-basis: 48%; display: flex; flex-direction: column; min-height: 0; }
+  .gallery-item button { flex: 1; min-height: 0; aspect-ratio: auto; }
+  .gallery-item figcaption { flex-shrink: 0; margin-top: 12px; }
+  .concept-note { margin-top: 16px; flex-shrink: 0; }
+
+  .process { grid-template-columns: 1fr 1.1fr; gap: 7vw; }
+  .process-title { position: static; align-self: center; }
+  .process-title h2 { font-size: clamp(42px, 6.5svh, 64px); }
+  .process-title .eyebrow { margin-bottom: 20px; }
+  .process-title .button { margin-top: 28px; }
+  .process-step { padding: 18px 0; gap: 20px; }
+  .process-step h3 { font-size: 28px; margin-bottom: 9px; }
+  .process-step p { font-size: 16px; line-height: 1.5; max-width: 440px; }
+
+  .interior-banner { height: var(--panel-height); min-height: 0; padding: 32px var(--gutter); }
+  .banner-copy { width: 450px; padding: 28px; }
+  .banner-copy h2 { font-size: clamp(44px, 7svh, 64px); margin: 18px 0; }
+  .banner-copy p:not(.eyebrow) { margin-bottom: 18px; }
+
+  .studio { gap: 8vw; }
+  .studio-copy h2 { font-size: clamp(44px, 6.8svh, 66px); margin: 20px 0; }
+  .studio-copy > p:not(.eyebrow) { font-size: 16px; line-height: 1.6; }
+  .team-row { margin: 24px 0; padding-top: 20px; }
+  .studio-photo { display: flex; flex-direction: column; height: 100%; min-height: 0; padding: 18px; rotate: 0deg; }
+  .studio-photo img { flex: 1; min-height: 0; height: 0; aspect-ratio: auto; object-fit: cover; }
+  .studio-photo figcaption { flex-shrink: 0; margin-top: 14px; }
+
+  .care-strip { padding: 40px var(--gutter); }
+  .care-strip h2 { font-size: clamp(34px, 5svh, 52px); }
+  .contact { gap: 6vw; }
+  .contact-intro h2 { font-size: clamp(40px, 6.5svh, 64px); margin: 20px 0; }
+  .contact-intro > p:not(.eyebrow) { font-size: 16px; line-height: 1.6; }
+  .phone-link { margin-top: 26px; font-size: clamp(30px, 4.5svh, 40px); }
+  .contact-address { margin-top: 24px; }
+  .contact-form { gap: 12px 22px; }
+  .contact-form .button { margin-top: 12px; }
+  .footer { padding-top: 0; padding-bottom: 24px; }
+  .footer-logo { padding-top: 28px; }
+  .footer-bottom { margin-top: 24px; padding-top: 20px; }
+  .care-hero { min-height: 0; height: 100svh; padding: 150px var(--gutter) 48px; display: flex; align-items: center; }
+  .care-hero h1 { font-size: clamp(48px, 8svh, 80px); }
+}
+
+@media (min-width: 1000px) and (min-height: 640px) and (max-height: 700px) {
+  .detail-copy h2 { font-size: 46px; margin: 14px 0 18px; }
+  .detail-copy > p:not(.eyebrow) { line-height: 1.5; }
+  .detail-line { margin-top: 18px; padding-top: 14px; }
+  .process-step { padding: 16px 0; }
+}
+
+@media (max-width: 999px) {
+  .hero-console { grid-template-columns: 1fr auto; gap: 20px; }
+  .hero-console .console-specialties { display: none; }
+  .detail-story, .studio, .contact { grid-template-columns: 1fr; gap: 40px; }
+  .detail-visual { height: min(55svh, 480px); aspect-ratio: auto; margin-right: calc(-1 * var(--gutter)); }
+  .detail-copy { padding: 0; }
+  .detail-copy h2 { font-size: clamp(44px, 7svh, 62px); }
+  .studio-photo { max-width: 600px; width: 100%; rotate: 0deg; }
+  .studio-photo img { aspect-ratio: auto; height: min(50svh, 420px); object-fit: cover; }
+  .contact-form { width: 100%; }
+}
+
+@media (max-width: 700px) {
+  :root { --nav-space: 88px; }
+  .header, .header.is-scrolled { left: 16px; top: 12px; width: calc(100% - 32px); height: 60px; padding: 0 18px; }
+  .hero { min-height: 600px; padding: 104px 20px 16px; gap: 12px; }
+  .hero-headline .eyebrow { font-size: 11px; }
+  .hero-headline h1 { font-size: clamp(40px, 10.5vw, 60px); margin-top: 10px; }
+  .hero-headline h1 small { font-size: 21px; }
+  .hero-vehicle { width: 100%; height: 100%; max-height: 100%; left: auto; top: auto; object-position: center; transform: none; }
+  .hero-wordmark { left: 20px; width: calc(100% - 40px); top: 39%; }
+  .hero-console { grid-template-columns: 1fr; gap: 14px; padding: 18px; }
+  .hero-console p { font-size: 14px; line-height: 1.5; }
+  .hero-console .button { min-height: 48px; font-size: 13px; }
+  .hero-bottom { left: auto; right: auto; bottom: auto; font-size: 11px; }
+  .section { padding-top: 44px; padding-bottom: 44px; }
+  .intro { gap: 25px; }
+  .intro h2 { font-size: clamp(40px, 10.8vw, 58px); }
+  .service, .service:first-child { min-height: 0; height: min(540px, var(--panel-height)); }
+  .services { padding-bottom: 36px; }
+  .detail-story { gap: 34px; }
+  .detail-visual { height: min(54svh, 460px); }
+  .detail-copy h2 { margin: 20px 0; font-size: clamp(42px, 11vw, 60px); }
+  .detail-line { margin-top: 24px; }
+  .gallery-section { padding-top: 36px; padding-bottom: 32px; }
+  .section-top { margin-bottom: 24px; }
+  .section-top h2 { font-size: 48px; }
+  .gallery-item button { height: min(44svh, 380px); aspect-ratio: auto; }
+  .gallery-item figcaption { margin-top: 12px; }
+  .concept-note { margin-top: 16px; }
+  .process { gap: 30px; }
+  .process-title h2 { font-size: 42px; }
+  .process-step { padding: 22px 0; }
+  .interior-banner { height: var(--panel-height); min-height: 560px; padding: 20px; }
+  .banner-copy { padding: 24px; }
+  .banner-copy h2 { font-size: clamp(40px, 10.8vw, 52px); margin: 18px 0; }
+  .studio-copy h2 { font-size: 44px; }
+  .contact-intro h2 { font-size: clamp(38px, 10.5vw, 45px); }
+  .contact-form { padding: 22px; gap: 14px; }
+  .contact-form label[for="name"], .contact-form label[for="car"] { grid-column: 1 / -1; }
+  .contact-form .button { gap: 12px; padding-left: 16px; padding-right: 16px; margin-top: 8px; }
+  .care-hero { min-height: 0; padding-top: 128px; padding-bottom: 44px; }
+}
+
+@keyframes fitted-vehicle-entry {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-vehicle { animation: none; transform: none; }
+}
+
+/* Keep the entire BMW visible in the studio photograph. */
+.studio-photo--bmw { align-self: center; height: auto; }
+.studio-photo--bmw img { flex: 0 1 auto; height: auto; aspect-ratio: 1323 / 1189; object-fit: contain; }
+@media (min-width: 1000px) and (min-height: 640px) {
+  .studio-photo--bmw img { max-height: calc(100svh - 230px); }
+}
+
+/* Keep the Porsche crest and natural workshop reflections in the crop. */
+.gallery-item img.porsche-studio-wheel { object-position: 49% 57%; }

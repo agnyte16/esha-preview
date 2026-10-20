@@ -1,0 +1,82 @@
+/* Low-key studio photograph. ESHA logo geometry remains unchanged. */
+.hero.hero-refined {
+  height: 100svh;
+  min-height: 620px;
+  max-height: none;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 8px;
+  padding: 112px 0 36px;
+  background: var(--black);
+  overflow: hidden;
+}
+.hero-refined .hero-headline { padding: 0 24px; text-align: center; pointer-events: auto; position: relative; z-index: 2; }
+.hero-refined .hero-headline h1 { margin: 0; font-size: clamp(40px, 6svh, 60px); line-height: 1.06; letter-spacing: -.04em; }
+.hero-refined .hero-headline h1 small { font-size: clamp(18px, 2.6svh, 24px); line-height: 1.3; margin: 0 0 6px; color: var(--gray); }
+.hero-refined .hero-headline h1 span { white-space: normal; }
+.hero-studio-frame { position: relative; isolation: isolate; width: 100%; height: 100%; min-height: 0; margin: 0; overflow: hidden; }
+.hero-studio-frame::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, var(--black), transparent 16%, transparent 78%, var(--black)), linear-gradient(90deg,var(--black),transparent 8%,transparent 94%,var(--black)); }
+.hero-studio-photo { display: block; width: 100%; max-width: 1800px; height: 100%; margin-inline: auto; object-fit: cover; object-position: 50% 53%; }
+.hero-refined .hero-wordmark { position: absolute; top: 4%; left: 50%; width: min(82%, 1000px); height: auto; transform: translateX(-50%); z-index: 1; opacity: .04; filter: invert(1); pointer-events: none; will-change: auto; }
+.hero-action { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; padding: 0 24px; }
+
+/* Original symbol paths: widths 15.32 / 30.09 / 60.27, height 115.33.
+   Joining translations close only the original 10.16–10.19-unit gaps.
+   The fourth segment extends the same 18.42 / 115.33 inclination. */
+.esha-cta { --cta-height: 68px; --cta-lean: calc(var(--cta-height) * .1597156); --cta-joined-start: calc(var(--cta-height) * .264632); --cta-panel-start: calc(var(--cta-height) * 1.18086); display: block; position: relative; width: min(590px, 100%); height: var(--cta-height); flex-shrink: 0; color: var(--black); isolation: isolate; }
+/* One continuous backing closes rasterisation seams without changing bar height. */
+.cta-solid { position: absolute; inset: 0 0 0 var(--cta-joined-start); pointer-events: none; }
+.cta-solid::before { content: ''; position: absolute; inset: 0; background: var(--yellow); clip-path: polygon(var(--cta-lean) 0,100% 0,calc(100% - var(--cta-lean)) 100%,0 100%); opacity: 1; transition: opacity 120ms 340ms; }
+.cta-stripes { position: absolute; left: 0; top: 0; z-index: 1; height: 100%; width: calc(var(--cta-height) * 1.25249); overflow: visible; fill: var(--yellow); }
+.cta-stripe { stroke: none; transition: transform 460ms cubic-bezier(.22,.8,.25,1); }
+.cta-stripe-1 { transform: translateX(30.52px); }
+.cta-stripe-2 { transform: translateX(20.35px); }
+.cta-stripe-3 { transform: translateX(10.16px); }
+.cta-panel { position: absolute; z-index: 1; inset: 0 0 0 var(--cta-panel-start); background: var(--yellow); clip-path: polygon(var(--cta-lean) 0,100% 0,calc(100% - var(--cta-lean)) 100%,0 100%); pointer-events: none; }
+.cta-content { position: absolute; z-index: 2; inset: 0 0 0 var(--cta-joined-start); display: grid; place-items: center; padding: 0 56px; transition: left 460ms cubic-bezier(.22,.8,.25,1); pointer-events: none; }
+.cta-label { font-family: Nohemi, Arial, sans-serif; font-weight: 600; font-size: 17px; text-transform: uppercase; text-align: center; letter-spacing: .015em; line-height: 1.2; }
+.cta-content .brand-icon { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; }
+.esha-cta:focus-visible { outline: 2px solid var(--paper); outline-offset: 8px; }
+.esha-cta:is(:focus-visible,:active) .cta-stripe { transform: translateX(0); }
+.esha-cta:is(:focus-visible,:active) .cta-solid::before { opacity: 0; transition-delay: 0ms; }
+.esha-cta:is(:focus-visible,:active) .cta-content { left: var(--cta-panel-start); }
+@media (hover: hover) and (pointer: fine) {
+ .esha-cta:hover .cta-stripe { transform: translateX(0); }
+ .esha-cta:hover .cta-solid::before { opacity: 0; transition-delay: 0ms; }
+ .esha-cta:hover .cta-content { left: var(--cta-panel-start); }
+}
+@keyframes esha-stripe-arrive { from { opacity: 0; transform: translateX(-110px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes esha-panel-arrive { from { opacity: 0; transform: translateX(-60px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes esha-cta-reveal { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+ .cta-arrival { animation: esha-stripe-arrive 850ms cubic-bezier(.2,.7,.25,1) both; }
+ .cta-arrival-1 { animation-delay: 520ms; }
+ .cta-arrival-2 { animation-delay: 620ms; }
+ .cta-arrival-3 { animation-delay: 720ms; }
+ .cta-panel { animation: esha-panel-arrive 900ms cubic-bezier(.2,.7,.25,1) 820ms both; }
+ .cta-solid { animation: esha-cta-reveal 120ms linear 1600ms both; }
+ .cta-content { animation: esha-cta-reveal 350ms ease 1370ms both; }
+}
+@media (max-width: 700px) {
+ .hero.hero-refined { height: 100svh; min-height: 560px; padding: 104px 0 28px; gap: 12px; }
+ .hero-refined .hero-headline h1 { font-size: clamp(38px, 10.5vw, 52px); }
+ .hero-refined .hero-headline h1 small { font-size: 19px; }
+ .hero-studio-photo { object-position: 64% 50%; }
+ .hero-refined .hero-wordmark { top: 5%; width: 90%; opacity: .04; }
+ .esha-cta { --cta-height: 62px; width: min(410px, 100%); }
+ .cta-content { padding: 0 42px; }
+ .cta-label { font-size: 14px; max-width: 200px; line-height: 1.25; }
+ .cta-content .brand-icon { right: 20px; width: 20px; height: 20px; }
+}
+@media (min-width: 701px) and (max-height: 650px) {
+ .hero.hero-refined { min-height: 560px; padding-top: 98px; padding-bottom: 24px; }
+ .hero-refined .hero-headline h1 { font-size: 40px; }
+ .hero-refined .hero-headline h1 small { font-size: 18px; }
+ .esha-cta { --cta-height: 60px; }
+}
+@media (prefers-reduced-motion: reduce) {
+ .cta-arrival, .cta-panel, .cta-solid, .cta-content { animation: none; }
+ .cta-stripe, .cta-content, .cta-solid::before { transition: none; }
+}
+.motion-off .cta-arrival, .motion-off .cta-panel, .motion-off .cta-solid, .motion-off .cta-content { animation: none; }
+.motion-off .cta-stripe, .motion-off .cta-content, .motion-off .cta-solid::before { transition: none; }

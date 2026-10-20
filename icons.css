@@ -1,0 +1,18 @@
+/* ESHA brandbook original paths; icons never depend on a text font. */
+.brand-icon { display: inline-block; width: 24px; height: 24px; flex: 0 0 auto; fill: currentColor; stroke: none; vertical-align: middle; pointer-events: none; }
+.button > span, .text-link > span, .phone-link > span { display: inline-flex; align-items: center; justify-content: center; }
+.header-contact .brand-icon { width: 20px; height: 20px; }
+.text-link .brand-icon { width: 20px; height: 20px; }
+.hero-bottom > a, .footer-bottom > a { display: inline-flex; align-items: center; gap: 8px; }
+.hero-bottom .brand-icon, .footer-bottom .brand-icon { width: 16px; height: 16px; }
+.phone-link .brand-icon { width: 30px; height: 30px; }
+.menu-toggle { width: auto; min-width: 72px; min-height: 44px; font: inherit; font-size: 14px; color: var(--paper); align-items: center; }
+.dialog-close { width: auto; min-width: 44px; height: 44px; padding: 8px 12px; font-family: inherit; font-size: 14px; line-height: 1; }
+.photo-dialog .dialog-close { border-radius: 999px; }
+.care-plus { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; flex: 0 0 auto; transform: none; }
+.care-plus .icon-collapse { display: none; }
+.care-guide[open] .icon-expand { display: none; }
+.care-guide[open] .icon-collapse { display: inline-block; }
+.select-field { display: block; position: relative; }
+.contact-form .select-field select { appearance: none; -webkit-appearance: none; padding-right: 32px; }
+.select-field > .brand-icon { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--paper); }

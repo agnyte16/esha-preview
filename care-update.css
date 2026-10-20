@@ -1,0 +1,326 @@
+/* ESHA Care: three plain-language guides, preserving the existing brand system. */
+.care-page .care-hero h1 {
+  max-width: 770px;
+  font-size: clamp(44px, 4.8vw, 64px);
+  text-wrap: balance;
+}
+
+.care-page .care-hero p:not(.eyebrow) {
+  max-width: 600px;
+}
+
+.care-image-note {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 22px;
+  color: var(--gray);
+  font-size: 12px;
+}
+
+.care-content {
+  grid-template-columns: minmax(230px, .75fr) minmax(0, 1.8fr);
+  align-items: start;
+  gap: clamp(40px, 5vw, 80px);
+}
+
+.care-intro h2 {
+  font-size: clamp(28px, 2.6vw, 36px);
+  margin-top: 18px;
+  text-wrap: balance;
+}
+
+.care-intro > p:not(.eyebrow) {
+  max-width: none;
+  margin-top: 22px;
+}
+
+.care-guides,
+.care-guide-heading {
+  min-width: 0;
+}
+
+.care-guide {
+  scroll-margin-top: 26px;
+}
+
+@media (min-width: 1000px) and (min-height: 640px) {
+  .care-guide { scroll-margin-top: calc(var(--nav-space) + 26px); }
+}
+
+.care-guide summary {
+  width: 100%;
+  min-height: 100px;
+  justify-content: space-between;
+  gap: 26px;
+}
+
+.care-guide summary:focus-visible {
+  outline-color: var(--black);
+  outline-offset: 6px;
+}
+
+.care-guide-heading .eyebrow {
+  font-size: 12px;
+  color: #646464;
+  margin-bottom: 10px;
+}
+
+.care-guide-heading h2 {
+  font-size: clamp(25px, 2.4vw, 30px);
+  text-wrap: balance;
+}
+
+.care-guide-content {
+  padding: 0 0 40px;
+}
+
+.care-guide-content p,
+.care-guide-content li {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #535353;
+}
+
+.care-guide-intro {
+  max-width: 680px;
+  margin-bottom: 28px;
+}
+
+.care-rule-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+
+.care-rule-group .eyebrow,
+.care-follow-up .eyebrow,
+.care-offer .eyebrow {
+  color: #646464;
+  font-size: 12px;
+  line-height: 1.65;
+  letter-spacing: .1em;
+  margin-bottom: 15px;
+}
+
+.care-rule-group ul {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.care-rule-group li + li {
+  margin-top: 15px;
+}
+
+.care-rule-group li::marker {
+  color: var(--gray);
+}
+
+.care-rule-caution {
+  background: var(--black);
+  border: 1px solid rgba(161, 161, 161, .2);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.care-rule-caution .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--yellow);
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+
+.care-rule-caution .eyebrow::before {
+  content: '';
+  flex: 0 0 20px;
+  width: 20px;
+  height: 16px;
+  background: url('assets/esha-symbol-yellow.svg') center / contain no-repeat;
+}
+
+.care-rule-caution li {
+  color: #e6e6e6;
+}
+
+.care-rule-caution li::marker {
+  color: var(--yellow);
+}
+
+.care-rule-caution li + li {
+  border-top: 1px solid var(--line);
+  padding-top: 15px;
+}
+
+.care-rule-caution strong {
+  color: var(--paper);
+  font-weight: 600;
+}
+
+@media (min-width: 701px) {
+  /* Match the dark card's padding and border so both lists start together. */
+  .care-rule-group:not(.care-rule-caution) {
+    padding-top: 25px;
+  }
+
+  .care-rule-group > .eyebrow {
+    margin-bottom: 22px;
+  }
+}
+
+.care-follow-up {
+  border-top: 1px solid rgba(161, 161, 161, .35);
+  padding-top: 26px;
+  margin-top: 32px;
+}
+
+.care-offer {
+  padding: 25px;
+  margin-top: 28px;
+  background: #f0f0f0;
+  border: 1px solid rgba(161, 161, 161, .25);
+  border-radius: 16px;
+}
+
+.care-offer h3 {
+  font-size: 19px;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.care-guide-content .button {
+  margin-top: 24px;
+  max-width: 100%;
+  gap: 20px;
+  line-height: 1.5;
+}
+
+.care-content .button:hover {
+  background: var(--black);
+  color: var(--paper);
+}
+
+.care-content .button:focus-visible {
+  outline-color: var(--black);
+}
+
+.care-page .care-strip h2 {
+  font-size: clamp(30px, 3vw, 42px);
+}
+
+.care-page .care-strip p:not(.eyebrow) {
+  color: #646464;
+  max-width: 680px;
+}
+
+.care-page .care-strip .button:hover {
+  background: var(--black);
+  color: var(--paper);
+}
+
+.care-contact-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  flex: 0 0 auto;
+}
+
+.care-phone {
+  font-size: 14px;
+  border-bottom: 1px solid #a1a1a1;
+}
+
+.care-page .nav [aria-current="page"] {
+  color: var(--yellow);
+}
+
+.care-page .mobile-contact {
+  margin-top: auto;
+}
+
+@media (max-width: 1150px) {
+  .care-content {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .care-intro {
+    max-width: 680px;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .care-page .care-hero {
+    min-height: min(700px, 100svh);
+  }
+
+  .care-page .care-hero h1 {
+    font-size: clamp(38px, 10.5vw, 52px);
+  }
+
+  .care-content {
+    display: grid;
+  }
+
+  .care-guide-heading h2 {
+    font-size: 26px;
+  }
+
+  .care-guide summary {
+    gap: 18px;
+    padding: 25px 0;
+  }
+
+  .care-rule-columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .care-guide-content {
+    padding-bottom: 30px;
+  }
+
+  .care-offer {
+    padding: 21px;
+  }
+
+  .care-rule-caution {
+    padding: 20px;
+  }
+
+  .care-guide-content .button {
+    width: 100%;
+    padding-inline: 20px;
+  }
+
+  .care-page .care-strip .care-contact-actions {
+    align-items: flex-start;
+    margin-top: 26px;
+  }
+
+  .care-page .care-strip .button {
+    margin-top: 0;
+  }
+
+  .care-page .mobile-menu {
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .care-rule-caution {
+    padding: 18px;
+  }
+
+  .care-offer {
+    padding: 17px;
+  }
+
+  .care-page .care-hero .button {
+    gap: 16px;
+    padding-inline: 20px;
+  }
+}
