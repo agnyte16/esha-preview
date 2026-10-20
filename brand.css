@@ -43,19 +43,21 @@
   letter-spacing: 0;
 }
 
-/* Graphic element, pp. 7–9: a cropped, uniformly scaled original symbol.
+/* Graphic element, pp. 7–9: the original symbol runs across the full photo height.
    Frosted transparency is the website adaptation; the paths stay intact. */
 .brand-glass {
   position: absolute;
   z-index: 1;
-  top: 8%;
+  top: 0;
   right: -5%;
-  width: min(66vw, 820px);
+  height: 100%;
+  width: auto;
   aspect-ratio: 144.45 / 115.33;
   display: block;
   background: linear-gradient(145deg, rgba(250, 250, 250, .2), rgba(15, 15, 15, .2));
   backdrop-filter: blur(12px) saturate(.78);
   -webkit-backdrop-filter: blur(12px) saturate(.78);
+  opacity: .8;
   -webkit-mask-image: url('assets/esha-symbol-white.svg');
   mask-image: url('assets/esha-symbol-white.svg');
   -webkit-mask-position: center;
@@ -71,8 +73,8 @@
   .logo img { width: 126px; }
   .brand-symbol { width: 35px; }
   .brand-glass {
-    top: 12%;
+    top: 0;
     right: -17%;
-    width: 90%;
+    height: 100%;
   }
 }
