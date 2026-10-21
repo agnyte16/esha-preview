@@ -69,13 +69,25 @@ const serviceData={
 };
 const serviceDialog=document.getElementById('service-dialog');
 const serviceDialogContent=serviceDialog?.querySelector('.service-dialog-content');
-const syncServiceScrollCue=()=>{
-  if(!serviceDialog||!serviceDialogContent)return;
-  serviceDialog.classList.toggle('has-scroll-cue',serviceDialogContent.scrollHeight>serviceDialogContent.clientHeight+8);
-  serviceDialog.classList.toggle('has-scrolled',serviceDialogContent.scrollTop>12);
+const serviceScrollIndicator=serviceDialog?.querySelector('.service-scroll-indicator');
+const serviceScrollThumb=serviceDialog?.querySelector('.service-scroll-thumb');
+const syncServiceScrollIndicator=()=>{
+  if(!serviceDialog||!serviceDialogContent||!serviceScrollIndicator||!serviceScrollThumb)return;
+  const contentHeight=serviceDialogContent.scrollHeight;
+  const viewportHeight=serviceDialogContent.clientHeight;
+  const canScroll=contentHeight>viewportHeight+8;
+  serviceDialog.classList.toggle('has-scroll-indicator',canScroll);
+  if(!canScroll)return;
+  const trackHeight=serviceScrollIndicator.clientHeight;
+  if(trackHeight<=0)return;
+  const thumbHeight=Math.min(trackHeight,Math.max(28,trackHeight*(viewportHeight/contentHeight)));
+  const scrollRange=contentHeight-viewportHeight;
+  const thumbOffset=scrollRange>0?(serviceDialogContent.scrollTop/scrollRange)*(trackHeight-thumbHeight):0;
+  serviceScrollThumb.style.height=`${thumbHeight}px`;
+  serviceScrollThumb.style.transform=`translateY(${thumbOffset}px)`;
 };
-serviceDialogContent?.addEventListener('scroll',syncServiceScrollCue,{passive:true});
-window.addEventListener('resize',syncServiceScrollCue,{passive:true});
+serviceDialogContent?.addEventListener('scroll',syncServiceScrollIndicator,{passive:true});
+window.addEventListener('resize',syncServiceScrollIndicator,{passive:true});
 const syncDetailsState=details=>details.querySelector('summary')?.setAttribute('aria-expanded',String(details.open));
 document.querySelectorAll('.care-guide').forEach(details=>{
   syncDetailsState(details);
@@ -114,10 +126,10 @@ document.querySelectorAll('[data-service]').forEach(button=>button.addEventListe
   }
   document.getElementById('dialog-contact').dataset.select=item.interest;
   document.getElementById('dialog-gallery').hidden=button.dataset.service!=='interior';
-  serviceDialog.classList.remove('has-scroll-cue','has-scrolled');
+  serviceDialog.classList.remove('has-scroll-indicator');
   serviceDialog.showModal();
   serviceDialogContent.scrollTop=0;
-  requestAnimationFrame(syncServiceScrollCue);
+  requestAnimationFrame(syncServiceScrollIndicator);
 }));
 document.querySelectorAll('dialog').forEach(dialog=>{dialog.querySelector('.dialog-close')?.addEventListener('click',()=>dialog.close());dialog.addEventListener('click',event=>{const rect=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom))dialog.close();});});
 document.querySelectorAll('[data-select],#dialog-contact').forEach(link=>link.addEventListener('click',()=>{const select=document.getElementById('interest');if(select)select.value=link.dataset.select;serviceDialog?.close();}));

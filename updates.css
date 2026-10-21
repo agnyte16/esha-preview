@@ -88,33 +88,34 @@
   overflow-y: auto;
   scrollbar-width: none;
   overscroll-behavior: contain;
-  padding: 50px 50px 38px;
+  padding: 50px 74px 38px 50px;
 }
 .service-dialog-content::-webkit-scrollbar { display: none; }
 .service-dialog-content:focus-visible { outline: 1px solid rgba(249, 219, 82, .55); outline-offset: -2px; }
-.service-scroll-cue {
+.service-scroll-indicator {
   position: absolute;
-  z-index: 1;
-  inset: auto 50px 0;
-  min-height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 13px 0 9px;
-  color: var(--yellow);
-  background: linear-gradient(180deg, rgba(15, 15, 15, 0), rgba(15, 15, 15, .9) 46%, rgba(15, 15, 15, .98));
-  font-size: 10px;
-  letter-spacing: .12em;
-  line-height: 1;
-  text-transform: uppercase;
+  z-index: 2;
+  top: 94px;
+  right: 23px;
+  bottom: 24px;
+  width: 3px;
+  border-radius: 999px;
+  background: rgba(249, 219, 82, .16);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity .2s ease, visibility .2s ease;
 }
-.service-scroll-cue .brand-icon { width: 15px; height: 15px; }
-.service-dialog.has-scroll-cue:not(.has-scrolled) .service-scroll-cue { opacity: 1; visibility: visible; }
+.service-scroll-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: inherit;
+  background: var(--yellow);
+  box-shadow: 0 0 7px rgba(249, 219, 82, .18);
+}
+.service-dialog.has-scroll-indicator .service-scroll-indicator { opacity: 1; visibility: visible; }
 .service-dialog-footer {
   flex: 0 0 auto;
   padding: 20px 50px;
@@ -131,14 +132,14 @@
   }
   .service-dialog-content {
     max-height: calc(90svh - 90px);
-    padding: 38px 24px 32px;
+    padding: 38px 42px 32px 24px;
   }
-  .service-scroll-cue { inset-inline: 24px; min-height: 42px; font-size: 9px; }
+  .service-scroll-indicator { top: 80px; right: 17px; bottom: 20px; width: 3px; }
   .service-dialog-footer { padding: 16px 24px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .service-scroll-cue { transition: none; }
+  .service-scroll-indicator { transition: none; }
 }
 
 @media (min-width: 1200px) and (min-height: 700px) {
