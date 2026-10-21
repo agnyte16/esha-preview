@@ -68,9 +68,7 @@ const serviceData={
   }
 };
 const serviceDialog=document.getElementById('service-dialog');
-const dialogExtras=document.getElementById('dialog-extras');
-const syncDetailsState=details=>details.querySelector('summary')?.setAttribute('aria-expanded',String(details.open));
-document.querySelectorAll('#dialog-extras,.care-guide').forEach(details=>{
+const syncDetailsState=details=>details.querySelector('summary')?.setAttribute('aria-expanded',String(details.open));document.querySelectorAll('.care-guide').forEach(details=>{
   syncDetailsState(details);
   details.addEventListener('toggle',()=>syncDetailsState(details));
 });
@@ -97,18 +95,14 @@ document.querySelectorAll('[data-service]').forEach(button=>button.addEventListe
   document.getElementById('dialog-title').textContent=item.title;
   document.getElementById('dialog-intro').textContent=item.intro;
   document.getElementById('dialog-note').textContent=item.note;
-  renderServiceRows(document.getElementById('dialog-options'),item.additional.length===1?[...item.options,...item.additional]:item.options);
-  const additional=document.getElementById('dialog-additional');
-  renderServiceRows(additional,item.additional.length>1?item.additional:[]);
+  const options=document.getElementById('dialog-options');
+  renderServiceRows(options,[...item.options,...item.additional]);
   if(item.additionalNote){
     const note=document.createElement('p');
     note.className='dialog-included-note';
     note.textContent=item.additionalNote;
-    additional.append(note);
+    options.append(note);
   }
-  dialogExtras.hidden=item.additional.length<=1;
-  dialogExtras.open=false;
-  syncDetailsState(dialogExtras);
   document.getElementById('dialog-contact').dataset.select=item.interest;
   document.getElementById('dialog-gallery').hidden=button.dataset.service!=='interior';
   serviceDialog.showModal();
