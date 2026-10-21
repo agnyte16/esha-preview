@@ -68,7 +68,16 @@ const serviceData={
   }
 };
 const serviceDialog=document.getElementById('service-dialog');
-const syncDetailsState=details=>details.querySelector('summary')?.setAttribute('aria-expanded',String(details.open));document.querySelectorAll('.care-guide').forEach(details=>{
+const serviceDialogContent=serviceDialog?.querySelector('.service-dialog-content');
+const syncServiceScrollCue=()=>{
+  if(!serviceDialog||!serviceDialogContent)return;
+  serviceDialog.classList.toggle('has-scroll-cue',serviceDialogContent.scrollHeight>serviceDialogContent.clientHeight+8);
+  serviceDialog.classList.toggle('has-scrolled',serviceDialogContent.scrollTop>12);
+};
+serviceDialogContent?.addEventListener('scroll',syncServiceScrollCue,{passive:true});
+window.addEventListener('resize',syncServiceScrollCue,{passive:true});
+const syncDetailsState=details=>details.querySelector('summary')?.setAttribute('aria-expanded',String(details.open));
+document.querySelectorAll('.care-guide').forEach(details=>{
   syncDetailsState(details);
   details.addEventListener('toggle',()=>syncDetailsState(details));
 });
@@ -105,8 +114,10 @@ document.querySelectorAll('[data-service]').forEach(button=>button.addEventListe
   }
   document.getElementById('dialog-contact').dataset.select=item.interest;
   document.getElementById('dialog-gallery').hidden=button.dataset.service!=='interior';
+  serviceDialog.classList.remove('has-scroll-cue','has-scrolled');
   serviceDialog.showModal();
-  serviceDialog.querySelector('.service-dialog-content').scrollTop=0;
+  serviceDialogContent.scrollTop=0;
+  requestAnimationFrame(syncServiceScrollCue);
 }));
 document.querySelectorAll('dialog').forEach(dialog=>{dialog.querySelector('.dialog-close')?.addEventListener('click',()=>dialog.close());dialog.addEventListener('click',event=>{const rect=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom))dialog.close();});});
 document.querySelectorAll('[data-select],#dialog-contact').forEach(link=>link.addEventListener('click',()=>{const select=document.getElementById('interest');if(select)select.value=link.dataset.select;serviceDialog?.close();}));
