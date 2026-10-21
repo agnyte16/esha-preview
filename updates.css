@@ -152,7 +152,7 @@
   .dialog-row-heading strong { display: block; margin-top: 8px; }
   .dialog-row-heading h3 { font-size: 19px; }
   .service-dialog h2 { font-size: 30px; }
-  .dialog-extras summary { font-size: 17px; }
+  
   .mobile-menu .button { margin-top: 16px; justify-content: center; }
 }
 
@@ -168,3 +168,6 @@
 /* Hide the scrollbar while keeping the service list scrollable. */
 .service-dialog-content { scrollbar-width: none; }
 .service-dialog-content::-webkit-scrollbar { display: none; }
+
+.dialog-included-note { margin: 16px 0 20px; color: var(--gray); font-size: 14px; line-height: 1.6; }
+
