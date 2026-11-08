@@ -165,7 +165,7 @@ if(gallery){
  sync();
 }
 const photoDialog=document.getElementById('photo-dialog');
-document.querySelectorAll('[data-photo]').forEach(button=>button.addEventListener('click',()=>{const image=document.getElementById('photo-full');image.src=button.dataset.photo;image.alt=button.querySelector('img').alt;document.getElementById('photo-caption').textContent=button.dataset.caption;photoDialog.showModal();}));
+document.querySelectorAll('[data-photo]').forEach(button=>button.addEventListener('click',()=>{const image=document.getElementById('photo-full');image.src=button.dataset.photo;image.alt=button.querySelector('img').alt;photoDialog.showModal();}));
 document.getElementById('contact-form')?.addEventListener('submit',async event=>{
  event.preventDefault();
  const form=event.currentTarget;
@@ -176,6 +176,7 @@ document.getElementById('contact-form')?.addEventListener('submit',async event=>
  const data=Object.fromEntries(new FormData(form).entries());
  data._subject='ESHA užklausa: '+data.car;
  data._template='table';
+ if(data.email)data._replyto=data.email;
  button.disabled=true;
  button.textContent='Siunčiama…';
  status.textContent='';
