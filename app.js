@@ -11,7 +11,7 @@ const updateHeader=()=>header?.classList.toggle('is-scrolled',window.scrollY>160
 const serviceData={
   exterior:{
     title:'Išorės priežiūra',interest:'Išorės priežiūra',
-    intro:'Pasirinkite pagal tai, ar automobiliui reikalinga reguliari priežiūra, ar išsamesnis išorės valymas.',
+    intro:'Nuo reguliaraus švaros palaikymo iki kruopštaus išorės valymo – pasirinkite paslaugą pagal savo automobilio poreikius.',
     options:[
       ['Palaikomasis išorės plovimas','nuo 60 €','Reguliariai prižiūrimo automobilio kėbulo ir ratlankių švarai palaikyti.'],
       ['Detalus išorės plovimas','90 €','Pilnam išorės valymui, įskaitant dervos, metalo dalelių ir kelio apnašų pašalinimą.']
