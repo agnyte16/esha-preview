@@ -166,7 +166,36 @@ if(gallery){
 }
 const photoDialog=document.getElementById('photo-dialog');
 document.querySelectorAll('[data-photo]').forEach(button=>button.addEventListener('click',()=>{const image=document.getElementById('photo-full');image.src=button.dataset.photo;image.alt=button.querySelector('img').alt;document.getElementById('photo-caption').textContent=button.dataset.caption;photoDialog.showModal();}));
-document.getElementById('contact-form')?.addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget;if(!form.reportValidity())return;const data=new FormData(form);const subject='ESHA užklausa: '+data.get('car');const body='Sveiki, ESHA,\n\nMano vardas: '+data.get('name')+'\nAutomobilis: '+data.get('car')+'\nDominanti paslauga: '+data.get('interest')+'\n\nMano lūkesčiai:\n'+data.get('message')+'\n\nLauksiu jūsų pasiūlymo.';window.location.href='mailto:esha.detailingas@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);document.getElementById('form-status').textContent='Laiško ruošinys paruoštas. Jei el. pašto programa neatsidarė, skambinkite +370 686 37809 arba rašykite esha.detailingas@gmail.com.';});
+document.getElementById('contact-form')?.addEventListener('submit',async event=>{
+ event.preventDefault();
+ const form=event.currentTarget;
+ if(!form.reportValidity())return;
+ const button=form.querySelector('[type="submit"]');
+ const status=document.getElementById('form-status');
+ const originalLabel=button.textContent;
+ const data=Object.fromEntries(new FormData(form).entries());
+ data._subject='ESHA užklausa: '+data.car;
+ data._template='table';
+ button.disabled=true;
+ button.textContent='Siunčiama…';
+ status.textContent='';
+ try{
+  const response=await fetch('https://formsubmit.co/ajax/esha.detailingas@gmail.com',{
+   method:'POST',
+   headers:{'Content-Type':'application/json','Accept':'application/json'},
+   body:JSON.stringify(data)
+  });
+  const result=await response.json();
+  if(!response.ok||result.success!==true&&result.success!=='true')throw new Error(result.message||'Formos siuntimas nepavyko.');
+  status.textContent='Ačiū! Jūsų užklausa išsiųsta ESHA. Netrukus su jumis susisieksime.';
+  form.reset();
+ }catch(error){
+  status.textContent='Užklausos išsiųsti nepavyko. Bandykite dar kartą arba skambinkite +370 686 37809.';
+ }finally{
+  button.disabled=false;
+  button.textContent=originalLabel;
+ }
+});
 const heroScene=document.querySelector('.hero');
 const parallaxImages=[...document.querySelectorAll('[data-parallax]')];
 const motionButton=document.querySelector('.motion-toggle');
