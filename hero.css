@@ -17,13 +17,7 @@
 .hero-studio-frame { position: relative; isolation: isolate; width: 100%; height: 100%; min-height: 0; margin: 0; overflow: hidden; }
 .hero-studio-frame::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, var(--black), transparent 16%, transparent 78%, var(--black)), linear-gradient(90deg,var(--black),transparent 8%,transparent 94%,var(--black)); }
 .hero-studio-photo { display: block; width: 100%; max-width: 1800px; height: 100%; margin-inline: auto; object-fit: cover; object-position: 50% 53%; }
-/* Rebuild the oversized frosted ESHA mark in two layers so it follows the
-   Porsche photo depth mask and stays legible across the vehicle contours. */
-.hero-wordmark-depth, .hero-wordmark-foreground { position: absolute; inset: 0; width: 100%; max-width: 1800px; margin-inline: auto; pointer-events: none; z-index: 1; }
-.hero-wordmark-depth { -webkit-mask: url('hero-porsche-depth-mask.svg') 50% 53% / cover no-repeat; mask: url('hero-porsche-depth-mask.svg') 50% 53% / cover no-repeat; }
-.hero-wordmark-foreground { z-index: 2; -webkit-mask-image: linear-gradient(90deg, #000 12%, #000 24%, transparent 43%, transparent 75%, rgba(0,0,0,.5) 90%); mask-image: linear-gradient(90deg, #000 12%, #000 24%, transparent 43%, transparent 75%, rgba(0,0,0,.5) 90%); }
-.hero-refined .hero-wordmark { position: absolute; top: 3%; left: 50%; width: min(94%, 1680px); height: auto; transform: translateX(-50%); z-index: auto; opacity: .16; filter: invert(1); pointer-events: none; will-change: auto; }
-.hero-refined .hero-wordmark-foreground .hero-wordmark { opacity: .035; }
+.hero-refined .hero-wordmark { position: absolute; top: 4%; left: 50%; width: min(82%, 1000px); height: auto; transform: translateX(-50%); z-index: 1; opacity: .04; filter: invert(1); pointer-events: none; will-change: auto; }
 .hero-action { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; padding: 0 24px; }
 
 /* Original symbol paths: widths 15.32 / 30.09 / 60.27, height 115.33.
@@ -68,8 +62,7 @@
  .hero-refined .hero-headline h1 { font-size: clamp(38px, 10.5vw, 52px); }
  .hero-refined .hero-headline h1 small { font-size: 19px; }
  .hero-studio-photo { object-position: 64% 50%; }
- .hero-wordmark-depth { -webkit-mask-position: 64% 50%; mask-position: 64% 50%; }
- .hero-refined .hero-wordmark { top: 17%; width: 94%; opacity: .2; }
+ .hero-refined .hero-wordmark { top: 5%; width: 90%; opacity: .04; }
  .esha-cta { --cta-height: 62px; width: min(410px, 100%); }
  .cta-content { padding: 0 42px; }
  .cta-label { font-size: 14px; max-width: 200px; line-height: 1.25; }
