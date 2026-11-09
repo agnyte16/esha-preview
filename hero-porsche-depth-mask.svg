@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1774" height="887" viewBox="0 0 1774 887">
+  <!-- Coordinates follow the existing photo; no image or logo geometry is changed. -->
+  <defs>
+    <mask id="studio-background" maskUnits="userSpaceOnUse" x="0" y="0" width="1774" height="887">
+      <rect width="1774" height="887" fill="white"/>
+      <path fill="black" d="M0 569 L39 539 Q94 500 167 499 L176 482 Q152 451 202 435 Q260 414 266 445 L263 489 C338 413 428 325 527 287 C614 257 748 264 885 276 C977 284 1047 296 1115 310 L1154 255 Q1168 238 1192 232 L1414 198 Q1433 190 1424 215 L1416 233 C1542 244 1660 251 1774 265 L1774 887 L0 887 Z"/>
+    </mask>
+  </defs>
+  <rect width="1774" height="887" fill="white" mask="url(#studio-background)"/>
+</svg>
